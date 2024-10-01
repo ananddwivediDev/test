@@ -9,8 +9,17 @@ public class RmiClient {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             RmiService rmiService = (RmiService) registry.lookup("RmiService");
-            String response = rmiService.sayHello("World");
-            System.out.println(response);
+
+            // Authenticate
+            if (rmiService.authenticate("user", "password")) {
+                String responseHello = rmiService.sayHello("World");
+                System.out.println(responseHello);
+
+                String responseGoodbye = rmiService.sayGoodbye("World");
+                System.out.println(responseGoodbye);
+            } else {
+                System.out.println("Authentication failed!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
