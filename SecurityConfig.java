@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         authenticationManagerBuilder
                 .inMemoryAuthentication()
-                .withUser("user").password("{noop}password").roles("USER");
+                .withUser("user").password("password").roles("USER");
 
         return authenticationManagerBuilder.build();
     }
